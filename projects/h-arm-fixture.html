@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H-arm welding fixture | Derrick Zhao</title>
+<meta name="description" content="A welding fixture for Baja SAE suspension H-arms, and what tolerance stack-up taught me.">
+<meta property="og:title" content="H-arm welding fixture | Derrick Zhao">
+<meta property="og:description" content="A welding fixture for Baja SAE suspension H-arms, and what tolerance stack-up taught me.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=B612:wght@400;700&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="../index.html">Derrick Zhao</a>
+  <nav aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#experience">Experience</a>
+    <a href="../index.html#about">About</a>
+    <a href="../assets/Derrick_Zhao_Resume.pdf">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<main id="main">
+<article class="case">
+  <a class="back" href="../index.html#work">All work</a>
+  <div class="case-head">
+    <div>
+      <h1>H-arm welding fixture</h1>
+      <p class="lede">The suspension H-arms are welded from several steel tubes, and their geometry sets the car’s suspension kinematics. I designed the fixture that holds every tube in its final position while the team welds.</p>
+    </div>
+    <dl class="title-block boxed">
+  <div><dt>Team</dt><dd>Northwestern Baja SAE</dd></div>
+  <div><dt>Role</dt><dd>Fixture designer</dd></div>
+  <div><dt>Dates</dt><dd>Sep 2024 to Jan 2025</dd></div>
+  <div><dt>Tools</dt><dd>SolidWorks assemblies, engineering drawings</dd></div>
+  <div><dt>Status</dt><dd>Built and used for welding</dd></div>
+</dl>
+  </div>
+  <figure class="case-hero"><div class="view contain"><img src="../assets/img/h-arm-fixture/hero.jpg" alt="H-arm welding fixture CAD assembly" loading="lazy"></div></figure>
+<div class="prose">
+<h2>The problem</h2>
+<p>Welders need every tube held rigidly in place so each H-arm comes out accurate and the next one matches it. The fixture also had to go from idea to fabricated on an accelerated timeline.</p>
+
+<h2>Designing around the part</h2>
+<p>I designed and checked the whole fixture in a SolidWorks assembly before cutting any material:</p>
+<ol>
+  <li>Started from a base plate with the finished H-arm model fixed as a reference.</li>
+  <li>Placed standard locating components, collets and brackets, around the arm.</li>
+  <li>Mated the collets to the base plate to build a cage that fully constrained the H-arm’s geometry.</li>
+  <li>Added custom support bars and specified shoulder bolts as extra constraints, so heat from welding wouldn’t pull the arm out of position.</li>
+</ol>
+<p>The deliverable was a fabrication package, not just a model: drawings for the base plate with every drilled and tapped hole located, and drawings for the support bars, so the team could build the fixture quickly and accurately.</p>
+</div>
+<figure class="gallery single">
+  <div class="grid">
+    <div class="view contain"><img src="../assets/img/h-arm-fixture/fixture.jpg" alt="H-arm fixture design" loading="lazy"></div>
+  </div>
+  <figcaption>The fixture assembly.</figcaption>
+</figure>
+<div class="prose">
+<h2>What the welded parts showed</h2>
+<p>Post-weld inspection found the finished H-arm about ¼ in. off nominal. Tracing it back was a direct lesson in tolerance stack-up: small allowances at each locator add up across a large welded assembly. Even a simple-looking fixture needs a deliberate tolerance budget, and that lesson shaped the ±0.001 in. locating I designed into later fixtures.</p>
+<!-- TODO: If you know which locators contributed most, or what you'd change on a rev 2, add it here. -->
+</div>
+  <nav class="case-nav" aria-label="More projects">
+    <a class="prev" href="e-cvt.html"><span>Previous</span><strong>Electronically actuated CVT</strong></a><a class="next" href="cvt-coupler-guard.html"><span>Next</span><strong>CVT coupler guard</strong></a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <p>Derrick Zhao, Evanston, IL. Updated <span data-year>2026</span>.</p>
+  <p><a href="mailto:derrickzhao10@gmail.com">Email</a><a href="https://www.linkedin.com/in/derrick-zhao-846027306">LinkedIn</a></p>
+</footer>
+</body>
+</html>

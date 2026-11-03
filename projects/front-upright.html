@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front upright | Derrick Zhao</title>
+<meta name="description" content="Redesigning the Baja SAE front upright to be lighter and survive race loads, using parametric CAD and six rounds of FEA.">
+<meta property="og:title" content="Front upright | Derrick Zhao">
+<meta property="og:description" content="Redesigning the Baja SAE front upright to be lighter and survive race loads, using parametric CAD and six rounds of FEA.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=B612:wght@400;700&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="../index.html">Derrick Zhao</a>
+  <nav aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#experience">Experience</a>
+    <a href="../index.html#about">About</a>
+    <a href="../assets/Derrick_Zhao_Resume.pdf">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<main id="main">
+<article class="case">
+  <a class="back" href="../index.html#work">All work</a>
+  <div class="case-head">
+    <div>
+      <h1>Front upright</h1>
+      <p class="lede">The front upright ties the wheel, steering, and suspension together on Northwestern’s Baja SAE car. I redesigned it to survive jump landings and side impacts while weighing less than the year before.</p>
+    </div>
+    <dl class="title-block boxed">
+  <div><dt>Team</dt><dd>Northwestern Baja SAE</dd></div>
+  <div><dt>Role</dt><dd>Lead designer, front upright</dd></div>
+  <div><dt>Dates</dt><dd>2025 to 2026</dd></div>
+  <div><dt>Tools</dt><dd>SolidWorks, FEA, CAM, 3-axis CNC mill</dd></div>
+  <div><dt>Status</dt><dd>Machined, tested, and revised</dd></div>
+</dl>
+  </div>
+  <figure class="case-hero"><div class="view contain"><img src="../assets/img/front-upright/hero.jpg" alt="Front upright CAD model" loading="lazy"></div></figure>
+<div class="prose">
+<h2>The problem</h2>
+<p>An off-road car lands jumps, hits ruts, and takes side impacts, and the upright carries all of those loads into the suspension. It also sits in unsprung mass, so every gram matters. The goal was a part that would survive race conditions while coming in lighter than the previous year’s design.</p>
+
+<h2>A parametric model</h2>
+<p>I built the upright as a fully parametric model driven by a small set of core dimensions and relationships. Changing a suspension parameter such as track width or caster angle updated the whole part, so I could chase weight and strength without accidentally breaking the car’s handling geometry.</p>
+</div>
+<figure class="gallery">
+  <div class="grid">
+    <div class="view contain"><img src="../assets/img/front-upright/assembly.jpg" alt="Upright in the corner assembly" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/iteration-1.jpg" alt="Upright design iteration" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/iteration-2.jpg" alt="Upright design iteration" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/iteration-3.jpg" alt="Upright design iteration" loading="lazy"></div>
+  </div>
+  <figcaption>The upright in the corner assembly, and design iterations along the way.</figcaption>
+</figure>
+<div class="prose">
+<h2>Letting FEA set the shape</h2>
+<p>I simulated three worst-case load cases drawn from real race conditions, with static loads above 17,500 N:</p>
+<ul>
+  <li>A vertical impact, for landing a jump.</li>
+  <li>A side impact, for a collision or catching a rut in a corner.</li>
+  <li>An angled impact, for a hit on the side of the tire.</li>
+</ul>
+<p>The first vertical-impact run came back with a minimum factor of safety of 0.22. The part would have failed. That plot became the roadmap: I added material and ribs around the bearing bore and mounting points where stress concentrated, and removed material from the low-stress regions to win back weight.</p>
+</div>
+<figure class="gallery single">
+  <div class="grid">
+    <div class="view contain"><img src="../assets/img/front-upright/fea-initial.jpg" alt="Initial FEA factor of safety plot showing failure near the bearing bore" loading="lazy"></div>
+  </div>
+  <figcaption>First vertical-impact study. Minimum factor of safety 0.22, concentrated around the bearing bore and mounts.</figcaption>
+</figure>
+<div class="prose">
+<p>After six iterations every study passed. The vertical case rose to a minimum factor of safety of 3.5. The angled impact became the governing case at 1.3, still above the team’s technical requirement. I noted where the weakest sections remained so I could keep surface finish smooth and tolerances tight there during machining.</p>
+</div>
+<figure class="gallery">
+  <div class="grid">
+    <div class="view contain"><img src="../assets/img/front-upright/fea-final-1.jpg" alt="Final FEA study" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/fea-final-2.jpg" alt="Final FEA study" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/fea-final-3.jpg" alt="Final FEA study" loading="lazy"></div>
+    <div class="view contain"><img src="../assets/img/front-upright/fea-final-4.jpg" alt="Final FEA study" loading="lazy"></div>
+  </div>
+  <figcaption>Final studies after six iterations.</figcaption>
+</figure>
+<div class="results">
+  <p class="result"><span class="result-figure">0.22 → 3.5</span><span class="result-label">Minimum factor of safety, vertical impact</span></p>
+  <p class="result"><span class="result-figure">1.3</span><span class="result-label">Minimum factor of safety, worst case (angled impact)</span></p>
+  <p class="result"><span class="result-figure">0.38 lb</span><span class="result-label">Lighter than the previous year’s upright</span></p>
+</div>
+<div class="prose">
+<h2>Machining it</h2>
+<p>I programmed CAM for a 3-axis CNC mill. The part has to be machined from both sides, so I designed a fixture plate that locates the blank on its bolt holes with dowel pins and bolts, holding position to ±0.001 in. after the flip.</p>
+
+<h2>Failure and redesign</h2>
+<p>During testing, an upright sheared in a crash. I ran a failure analysis on the broken part, identified the failure point and the stress concentrations that drove it, and revised the design before competition.</p>
+<!-- TODO: Add photos of the sheared part, what you found, and what you changed. This is the strongest part of the story. -->
+
+<h2>What I’d do next</h2>
+<p>Two directions: a multi-material upright with steel where it would reduce volume and possibly weight, and dynamic simulation (for example in Ansys) in place of single peak static loads.</p>
+</div>
+  <nav class="case-nav" aria-label="More projects">
+    <a class="next" href="e-cvt.html"><span>Next</span><strong>Electronically actuated CVT</strong></a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <p>Derrick Zhao, Evanston, IL. Updated <span data-year>2026</span>.</p>
+  <p><a href="mailto:derrickzhao10@gmail.com">Email</a><a href="https://www.linkedin.com/in/derrick-zhao-846027306">LinkedIn</a></p>
+</footer>
+</body>
+</html>

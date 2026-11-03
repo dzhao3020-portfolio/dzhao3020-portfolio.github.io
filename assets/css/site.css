@@ -1,0 +1,411 @@
+/* Derrick Zhao portfolio
+   Design idea: the site reads like an engineering drawing sheet. The hero is a
+   framed sheet with ASME-style zone markers and a title block; everything else
+   stays quiet so the work carries the page. */
+
+:root {
+  --paper: #F3F5F4;
+  --sheet: #FBFCFB;
+  --ink: #1E2422;
+  --ink-2: #56605C;
+  --rule: #C3CAC7;
+  --frame: #1E2422;
+  --accent: #2747A8;      /* layout-fluid blue */
+  --hatch: #D2D8D5;
+
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-tech: "B612", "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 66ch;
+  --page: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151A19;
+    --sheet: #1B2120;
+    --ink: #E2E7E5;
+    --ink-2: #A0AAA6;
+    --rule: #38423F;
+    --frame: #B9C2BE;
+    --accent: #97ACF2;
+    --hatch: #2C3533;
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+img { display: block; max-width: 100%; }
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p { margin: 0 0 1rem; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--sheet); padding: 0.5rem 1rem; }
+
+/* ---------- Header and footer ---------- */
+.site-header {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 1.25rem var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+}
+.wordmark {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 750;
+  font-variation-settings: "wdth" 115;
+  letter-spacing: -0.01em;
+}
+.site-header nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; }
+.site-header nav a { color: var(--ink); text-decoration: none; font-size: 0.95rem; }
+.site-header nav a:hover { color: var(--accent); text-decoration: underline; }
+
+.site-footer {
+  max-width: var(--page);
+  margin: 6rem auto 0;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+.site-footer p { margin: 0; }
+.site-footer a { margin-left: 1.25rem; }
+.site-footer a:first-child { margin-left: 0; }
+
+/* ---------- Hero: the drawing sheet ---------- */
+.sheet { max-width: var(--page); margin: 0.5rem auto 0; padding: 0 var(--gutter); }
+.sheet-frame {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) 1.5rem;
+  grid-template-rows: 1.5rem auto 1.5rem;
+  border: 1.5px solid var(--frame);
+  background: var(--sheet);
+}
+.zone-row { grid-column: 2; display: flex; }
+.zone-row.top { grid-row: 1; }
+.zone-row.bottom { grid-row: 3; }
+.zone-row span {
+  flex: 1;
+  text-align: center;
+  font: 400 0.7rem/1.5rem var(--font-tech);
+  color: var(--ink-2);
+  border-left: 1px solid var(--rule);
+}
+.zone-row span:first-child { border-left: 0; }
+.zone-col { grid-row: 2; display: flex; flex-direction: column; }
+.zone-col.left { grid-column: 1; }
+.zone-col.right { grid-column: 3; }
+.zone-col span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 400 0.7rem var(--font-tech);
+  color: var(--ink-2);
+  border-top: 1px solid var(--rule);
+}
+.zone-col span:first-child { border-top: 0; }
+
+.sheet-body {
+  grid-column: 2;
+  grid-row: 2;
+  border: 1px solid var(--frame);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+  align-items: end;
+}
+.hero-main { padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem); }
+
+.name-block { display: inline-grid; gap: 0.9rem; margin-bottom: 2rem; }
+.name {
+  margin: 0;
+  font-weight: 800;
+  font-variation-settings: "wdth" 118;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+
+/* Dimension line under the name, with extension lines and arrowheads */
+.dim {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-inline: 1px solid var(--accent);
+  color: var(--accent);
+  font: 400 0.78rem/1.3 var(--font-tech);
+  text-align: center;
+}
+.dim-text { white-space: nowrap; }
+.dim-arm { flex: 1; min-width: 1.5rem; height: 1px; background: currentColor; position: relative; }
+.dim-arm::before {
+  content: "";
+  position: absolute;
+  top: -3.5px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.dim-arm:first-child::before { left: 0; border-right: 9px solid currentColor; }
+.dim-arm:last-child::before { right: 0; border-left: 9px solid currentColor; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .dim-arm { animation: draw 0.9s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .dim-arm:first-child { transform-origin: right center; }
+  .dim-arm:last-child { transform-origin: left center; }
+  .dim-text { animation: appear 0.5s 0.15s ease-out both; }
+}
+@keyframes draw { from { transform: scaleX(0); } }
+@keyframes appear { from { opacity: 0; } }
+
+.lede { font-size: 1.2rem; line-height: 1.5; max-width: 36rem; margin: 0 0 1.75rem; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; }
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.15rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 2px;
+}
+.button:hover { background: var(--accent); color: var(--sheet); }
+
+/* Title block: real drawing-sheet info, boxed like the corner of a print */
+.title-block { margin: 0; border-top: 1px solid var(--frame); border-left: 1px solid var(--frame); }
+.title-block.boxed { border: 1px solid var(--frame); }
+.title-block > div {
+  display: grid;
+  grid-template-columns: 6.25rem minmax(0, 1fr);
+  border-top: 1px solid var(--frame);
+}
+.title-block > div:first-child { border-top: 0; }
+.title-block dt {
+  padding: 0.55rem 0.7rem;
+  border-right: 1px solid var(--frame);
+  font: 400 0.72rem/1.5 var(--font-tech);
+  color: var(--ink-2);
+}
+.title-block dd { margin: 0; padding: 0.5rem 0.75rem; font-size: 0.92rem; line-height: 1.4; }
+.title-block .tb-name dd { font-weight: 700; font-size: 1rem; }
+
+/* ---------- Sections ---------- */
+.section { max-width: var(--page); margin: 0 auto; padding: clamp(4rem, 9vw, 6.5rem) var(--gutter) 0; }
+.section-head { max-width: var(--measure); margin-bottom: 2.25rem; }
+.section-head p { color: var(--ink-2); margin: 0.6rem 0 0; }
+h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  font-weight: 750;
+  font-variation-settings: "wdth" 110;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-variation-settings: "wdth" 108;
+  line-height: 1.2;
+}
+h3 a { color: var(--ink); text-decoration: none; }
+h3 a:hover { color: var(--accent); text-decoration: underline; }
+
+/* Image frames. Missing files show a section-hatch and the expected path. */
+.view {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--frame);
+  background: var(--sheet);
+}
+.view img { width: 100%; height: 100%; object-fit: cover; }
+.view.contain img { object-fit: contain; }
+.view.is-missing {
+  background:
+    repeating-linear-gradient(45deg, transparent 0 7px, var(--hatch) 7px 8px),
+    var(--sheet);
+}
+.view.is-missing img { display: none; }
+.view.is-missing::after {
+  content: attr(data-missing);
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  padding: 0.3rem 0.45rem;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  font: 400 0.72rem/1.4 var(--font-tech);
+  color: var(--ink-2);
+  word-break: break-all;
+}
+a.view-link { display: block; }
+
+/* Key results */
+.result { display: grid; gap: 0.2rem; margin: 1.25rem 0; padding-left: 0.9rem; border-left: 2px solid var(--accent); }
+.result-figure { font: 700 1.55rem/1.15 var(--font-tech); }
+.result-label { font-size: 0.88rem; color: var(--ink-2); }
+
+.meta { margin: 0 0 0.35rem; font: 400 0.78rem/1.5 var(--font-tech); color: var(--ink-2); }
+
+/* Featured project */
+.feature {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 2rem 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.feature h3 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+  gap: 3.25rem 2.5rem;
+}
+.work-item .view { margin-bottom: 1rem; }
+.work-item p { margin-bottom: 0.5rem; }
+.work-item .result { margin: 0.9rem 0 0; }
+.work-item .result-figure { font-size: 1.2rem; }
+
+/* Experience */
+.timeline { list-style: none; margin: 0; padding: 0; max-width: 64rem; }
+.timeline > li {
+  display: grid;
+  grid-template-columns: 11.5rem minmax(0, 1fr);
+  gap: 0.25rem 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+.timeline > li:last-child { border-bottom: 1px solid var(--rule); }
+.when { font: 400 0.8rem/1.7 var(--font-tech); color: var(--ink-2); }
+.timeline h3 { font-size: 1.12rem; margin-bottom: 0.15rem; }
+.org { color: var(--ink-2); margin: 0 0 0.6rem; }
+.timeline p:last-child { margin-bottom: 0; }
+.timeline .body { max-width: var(--measure); }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 2rem 2.5rem; margin: 0; }
+.skills dt { font-weight: 700; margin-bottom: 0.35rem; }
+.skills dd { margin: 0; color: var(--ink-2); }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 2rem 3.5rem; align-items: start; }
+.about .view { aspect-ratio: 4 / 5; }
+.about .prose { max-width: var(--measure); }
+
+/* Contact */
+.contact-main {
+  display: inline-block;
+  margin: 0.5rem 0 1.25rem;
+  font-size: clamp(1.4rem, 4.2vw, 2.5rem);
+  font-weight: 700;
+  font-variation-settings: "wdth" 108;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.contact-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+
+/* ---------- Case study pages ---------- */
+.case { max-width: var(--page); margin: 0 auto; padding: 1rem var(--gutter) 0; }
+.back { font-size: 0.95rem; }
+.case-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+  gap: 2rem 3.5rem;
+  align-items: end;
+  margin: 1.75rem 0 2.5rem;
+}
+.case-head h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 115;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.case-head .lede { margin: 0; }
+.case-hero { margin: 0 0 3.5rem; }
+.case-hero .view { aspect-ratio: 16 / 9; }
+
+.prose { max-width: var(--measure); }
+.prose h2 { font-size: clamp(1.4rem, 2.6vw, 1.75rem); margin: 3rem 0 0.8rem; }
+.prose > h2:first-child { margin-top: 0; }
+.prose ul, .prose ol { padding-left: 1.25rem; margin: 0 0 1rem; }
+.prose li { margin-bottom: 0.4rem; }
+
+.gallery { margin: 2.25rem 0 2.75rem; }
+.gallery .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; }
+.gallery.single .grid { grid-template-columns: minmax(0, 1fr); max-width: 52rem; }
+figcaption { margin-top: 0.6rem; font-size: 0.88rem; color: var(--ink-2); max-width: var(--measure); }
+
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 0.5rem 2rem; margin: 1.5rem 0 1rem; }
+.results .result { margin: 0.5rem 0; }
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.case-nav a { display: grid; gap: 0.15rem; text-decoration: none; }
+.case-nav a span { font: 400 0.75rem var(--font-tech); color: var(--ink-2); }
+.case-nav a strong { font-weight: 700; font-size: 1.1rem; }
+.case-nav a:hover strong { text-decoration: underline; }
+.case-nav .next { text-align: right; margin-left: auto; }
+
+/* Inline SVG schematics */
+.schematic { width: 100%; height: 100%; color: var(--ink); }
+.schematic text { font-family: var(--font-tech); font-size: 11px; fill: currentColor; }
+.schematic .thin { stroke: var(--ink-2); stroke-width: 0.75; fill: none; }
+.schematic .center { stroke: var(--ink-2); stroke-width: 0.75; stroke-dasharray: 14 3 3 3; fill: none; }
+.schematic .part { stroke: currentColor; stroke-width: 1.5; fill: none; }
+.schematic .belt { stroke: currentColor; stroke-width: 5; fill: none; stroke-linejoin: round; }
+.schematic .acc { stroke: var(--accent); stroke-width: 1; fill: none; }
+.schematic .acc-fill { fill: var(--accent); }
+.schematic .acc-text { fill: var(--accent); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .sheet-body { grid-template-columns: minmax(0, 1fr); }
+  .title-block { border-left: 0; }
+  .feature, .about, .case-head { grid-template-columns: minmax(0, 1fr); }
+  .about .view { max-width: 22rem; }
+  .timeline > li { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .sheet-frame { display: block; padding: 0.35rem; }
+  .zone-row, .zone-col { display: none; }
+  .title-block > div { grid-template-columns: 5.25rem minmax(0, 1fr); }
+  .site-footer a { margin-left: 0; margin-right: 1.25rem; }
+}
+
+@media print {
+  .site-header nav, .skip, .hero-actions, .case-nav { display: none; }
+  body { background: #fff; }
+}

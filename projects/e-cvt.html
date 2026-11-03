@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electronically actuated CVT | Derrick Zhao</title>
+<meta name="description" content="Leading the design of an electronically actuated CVT for Northwestern Baja SAE.">
+<meta property="og:title" content="Electronically actuated CVT | Derrick Zhao">
+<meta property="og:description" content="Leading the design of an electronically actuated CVT for Northwestern Baja SAE.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=B612:wght@400;700&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="../index.html">Derrick Zhao</a>
+  <nav aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#experience">Experience</a>
+    <a href="../index.html#about">About</a>
+    <a href="../assets/Derrick_Zhao_Resume.pdf">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<main id="main">
+<article class="case">
+  <a class="back" href="../index.html#work">All work</a>
+  <div class="case-head">
+    <div>
+      <h1>Electronically actuated CVT</h1>
+      <p class="lede">A CVT that shifts on command. I’m leading the design of an electronically actuated CVT for Northwestern Baja SAE, where a ball screw sets the primary sheave position.</p>
+    </div>
+    <dl class="title-block boxed">
+  <div><dt>Team</dt><dd>Northwestern Baja SAE</dd></div>
+  <div><dt>Role</dt><dd>E-CVT lead</dd></div>
+  <div><dt>Dates</dt><dd>May 2026 to present</dd></div>
+  <div><dt>Tools</dt><dd>SolidWorks, belt kinematics model</dd></div>
+  <div><dt>Status</dt><dd>In design</dd></div>
+</dl>
+  </div>
+  <figure class="case-hero"><div class="view contain"><svg class="schematic" viewBox="0 0 440 280" role="img" aria-labelledby="ecvt-t">
+  <title id="ecvt-t">Schematic of the E-CVT: a smaller primary pulley on the engine shaft and a larger secondary pulley joined by the belt, with the center distance dimensioned.</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path class="acc-fill" d="M0 1.8 L10 5 L0 8.2z"/>
+    </marker>
+  </defs>
+  <line class="center" x1="40" y1="110" x2="420" y2="110"/>
+  <line class="center" x1="100" y1="55" x2="100" y2="165"/>
+  <line class="center" x1="330" y1="25" x2="330" y2="195"/>
+  <path class="belt" d="M94.78 70.34 L320.87 40.60 A70 70 0 1 1 320.87 179.40 L94.78 149.66 A40 40 0 0 1 94.78 70.34Z"/>
+  <circle class="part" cx="100" cy="110" r="34"/>
+  <circle class="part" cx="100" cy="110" r="9"/>
+  <rect class="part" x="97" y="97.5" width="6" height="4"/>
+  <circle class="part" cx="330" cy="110" r="62"/>
+  <circle class="part" cx="330" cy="110" r="11"/>
+  <line class="thin" x1="100" y1="168" x2="100" y2="238"/>
+  <line class="thin" x1="330" y1="198" x2="330" y2="238"/>
+  <line class="acc" x1="101" y1="230" x2="329" y2="230" marker-start="url(#arr)" marker-end="url(#arr)"/>
+  <text class="acc-text" x="215" y="222" text-anchor="middle">C, center distance (being optimized)</text>
+  <text x="100" y="258" text-anchor="middle">Primary, on engine</text>
+  <text x="100" y="272" text-anchor="middle">1 in. keyed shaft</text>
+  <text x="330" y="258" text-anchor="middle">Secondary</text>
+  <text x="330" y="272" text-anchor="middle">to 7.92:1 final drive</text>
+  <line class="thin" x1="44" y1="34" x2="80" y2="90"/>
+  <circle class="acc-fill" cx="80" cy="90" r="2.5"/>
+  <text x="12" y="28">Ball screw moves the primary sheave</text>
+</svg></div></figure>
+<div class="prose">
+<h2>Fixed constraints</h2>
+<ul>
+  <li>The engine is the Kohler CH440 specified for Baja SAE, and its shaft must stay stock: 1 in. round with a standard keyway. Torque goes into the primary through a keyed plastic bushing.</li>
+  <li>The final drive ratio stays at 7.92:1.</li>
+  <li>The secondary’s maximum pitch diameter stays the same.</li>
+</ul>
+
+<h2>What’s open</h2>
+<p>Center distance was fixed at 8.5 in. and is now open to optimization, along with the primary’s maximum pitch diameter and belt length. I’m working through these with a belt and sheave kinematics model, and building a full SolidWorks assembly that moves the way the real mechanism will.</p>
+
+<h2>Actuation targets</h2>
+<p>A full shift from low to high should take 0.5 seconds. The calculated peak shift force is 892 lbf, delivered through a ball screw with a 5 mm lead.</p>
+</div>
+<div class="results">
+  <p class="result"><span class="result-figure">0.5 s</span><span class="result-label">Target time for a full low-to-high shift</span></p>
+  <p class="result"><span class="result-figure">892 lbf</span><span class="result-label">Calculated peak shift force</span></p>
+  <p class="result"><span class="result-figure">5 mm</span><span class="result-label">Ball screw lead</span></p>
+</div>
+<!-- TODO: Add CAD renders, the kinematics plots, and actuator sizing as the design matures. -->
+  <nav class="case-nav" aria-label="More projects">
+    <a class="prev" href="front-upright.html"><span>Previous</span><strong>Front upright</strong></a><a class="next" href="h-arm-fixture.html"><span>Next</span><strong>H-arm welding fixture</strong></a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <p>Derrick Zhao, Evanston, IL. Updated <span data-year>2026</span>.</p>
+  <p><a href="mailto:derrickzhao10@gmail.com">Email</a><a href="https://www.linkedin.com/in/derrick-zhao-846027306">LinkedIn</a></p>
+</footer>
+</body>
+</html>
