@@ -11,7 +11,7 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=B612:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/site.js" defer></script>
 </head>
@@ -32,6 +32,7 @@
   <a class="back" href="../index.html#work">All work</a>
   <div class="case-head">
     <div>
+      <p class="kicker">Northwestern Baja SAE, May 2026 to present</p>
       <h1>Electronically actuated CVT</h1>
       <p class="lede">A CVT that shifts on command. I’m leading the design of an electronically actuated CVT for Northwestern Baja SAE, where a ball screw sets the primary sheave position.</p>
     </div>
@@ -43,7 +44,7 @@
   <div><dt>Status</dt><dd>In design</dd></div>
 </dl>
   </div>
-  <figure class="case-hero"><div class="view contain"><svg class="schematic" viewBox="0 0 440 280" role="img" aria-labelledby="ecvt-t">
+  <figure class="case-hero"><div class="view contain blueprint"><svg class="schematic" viewBox="0 0 440 280" role="img" aria-labelledby="ecvt-t">
   <title id="ecvt-t">Schematic of the E-CVT: a smaller primary pulley on the engine shaft and a larger secondary pulley joined by the belt, with the center distance dimensioned.</title>
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
@@ -83,7 +84,7 @@
 <p>Center distance was fixed at 8.5 in. and is now open to optimization, along with the primary’s maximum pitch diameter and belt length. I’m working through these with a belt and sheave kinematics model, and building a full SolidWorks assembly that moves the way the real mechanism will.</p>
 
 <h2>Actuation targets</h2>
-<p>A full shift from low to high should take 0.5 seconds. The calculated peak shift force is 892 lbf, delivered through a ball screw with a 5 mm lead.</p>
+<p>A full shift from low to high should take 0.5 seconds. The calculated peak shift force is 892 lbf, delivered through a ball screw with a 5 mm lead. The actuator itself is fixed and can’t be resized, so the mechanism has to hit these targets within what it can deliver.</p>
 </div>
 <div class="results">
   <p class="result"><span class="result-figure">0.5 s</span><span class="result-label">Target time for a full low-to-high shift</span></p>
@@ -92,7 +93,7 @@
 </div>
 <!-- TODO: Add CAD renders, the kinematics plots, and actuator sizing as the design matures. -->
   <nav class="case-nav" aria-label="More projects">
-    <a class="prev" href="front-upright.html"><span>Previous</span><strong>Front upright</strong></a><a class="next" href="h-arm-fixture.html"><span>Next</span><strong>H-arm welding fixture</strong></a>
+    <a class="next" href="front-upright.html"><span>Next</span><strong>Front upright</strong></a>
   </nav>
 </article>
 </main>
